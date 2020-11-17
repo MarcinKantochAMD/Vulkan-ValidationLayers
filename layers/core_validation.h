@@ -30,7 +30,6 @@
 #include "gpu_validation.h"
 #include "shader_validation.h"
 
-
 // Set of VUID that need to go between core_validation.cpp and drawdispatch.cpp
 struct DrawDispatchVuid {
     const char* queue_flag = kVUIDUndefined;
@@ -66,24 +65,24 @@ struct DrawDispatchVuid {
     const char* dynamic_state_setting_commands = kVUIDUndefined;
 };
 
-typedef struct {
-    const char* vuid_queue_flags;
-    const char* vuid_queue_feedback;
-    const char* vuid_queue_occlusion;
-    const char* vuid_precise;
-    const char* vuid_query_count;
-    const char* vuid_profile_lock;
-    const char* vuid_scope_not_first;
-    const char* vuid_scope_in_rp;
-    const char* vuid_dup_query_type;
-    const char* vuid_protected_cb;
-} ValidateBeginQueryVuids;
+struct ValidateBeginQueryVuids {
+    const char* vuid_queue_flags = kVUIDUndefined;
+    const char* vuid_queue_feedback = kVUIDUndefined;
+    const char* vuid_queue_occlusion = kVUIDUndefined;
+    const char* vuid_precise = kVUIDUndefined;
+    const char* vuid_query_count = kVUIDUndefined;
+    const char* vuid_profile_lock = kVUIDUndefined;
+    const char* vuid_scope_not_first = kVUIDUndefined;
+    const char* vuid_scope_in_rp = kVUIDUndefined;
+    const char* vuid_dup_query_type = kVUIDUndefined;
+    const char* vuid_protected_cb = kVUIDUndefined;
+};
 
-typedef struct {
-    const char* vuid_queue_flags;
-    const char* vuid_active_queries;
-    const char* vuid_protected_cb;
-} ValidateEndQueryVuids;
+struct ValidateEndQueryVuids {
+    const char* vuid_queue_flags = kVUIDUndefined;
+    const char* vuid_active_queries = kVUIDUndefined;
+    const char* vuid_protected_cb = kVUIDUndefined;
+};
 
 class CoreChecks : public ValidationStateTracker {
   public:
@@ -497,7 +496,8 @@ class CoreChecks : public ValidationStateTracker {
                                                               const char* variable_name) const;
     template <typename RegionType>
     bool ValidateBufferImageCopyData(const CMD_BUFFER_STATE* cb_node, uint32_t regionCount, const RegionType* pRegions,
-                                     const IMAGE_STATE* image_state, const char* function, CopyCommandVersion version, bool image_to_buffer) const;
+                                     const IMAGE_STATE* image_state, const char* function, CopyCommandVersion version,
+                                     bool image_to_buffer) const;
     bool ValidateBufferViewRange(const BUFFER_STATE* buffer_state, const VkBufferViewCreateInfo* pCreateInfo,
                                  const VkPhysicalDeviceLimits* device_limits) const;
     bool ValidateBufferViewBuffer(const BUFFER_STATE* buffer_state, const VkBufferViewCreateInfo* pCreateInfo) const;
